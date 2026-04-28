@@ -29,7 +29,7 @@ const DataJabatan = db.define('data_jabatan',{
             type: DataTypes.INTEGER(50)
         },
         userId: {
-            type: DataTypes.INTEGER,
+            type: DataTypes.STRING,
             allowNull: false,
             validate: {
                 notEmpty: true
@@ -39,7 +39,12 @@ const DataJabatan = db.define('data_jabatan',{
         freezeTableName: true
 });
 
-DataPegawai.hasMany(DataJabatan);
-DataJabatan.belongsTo(DataPegawai, {foreignKey: 'userId'});
+// DataPegawai.hasMany(DataJabatan);
+// DataJabatan.belongsTo(DataPegawai, {foreignKey: 'userId'});
+
+
+DataPegawai.hasMany(DataJabatan, { foreignKey: 'userId', sourceKey: 'id_pegawai' });
+DataJabatan.belongsTo(DataPegawai, { foreignKey: 'userId', targetKey: 'id_pegawai' });
+
 
 export default DataJabatan;

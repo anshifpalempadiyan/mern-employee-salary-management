@@ -6,6 +6,7 @@ const {DataTypes} = Sequelize;
 const DataPegawai = db.define('data_pegawai', {
     id_pegawai:{
         type: DataTypes.STRING,
+        primaryKey: true,
         defaultValue: DataTypes.UUIDV4,
         allowNull: false,
         validate:{

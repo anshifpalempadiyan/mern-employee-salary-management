@@ -1,7 +1,8 @@
+import dotenv from 'dotenv';
+dotenv.config();
 import express from 'express';
 import cors from 'cors';
 import session from 'express-session';
-import dotenv from 'dotenv';
 import db from './config/Database.js';
 
 import SequelizeStore from 'connect-session-sequelize';
@@ -9,6 +10,8 @@ import FileUpload from 'express-fileupload';
 
 import UserRoute from './routes/UserRoute.js';
 import AuthRoute from './routes/AuthRoute.js';
+import OvertimeRoute from './routes/OvertimeRoute.js';
+
 
 const app = express();
 
@@ -17,11 +20,11 @@ const store = new sessionStore({
     db: db
 });
 
-/* (async() => {
+(async() => {
+    await db.sync({ alter: true });
     await db.sync();
-})(); */
+})(); 
 
-dotenv.config();
 
 // Middleware
 app.use(session({
@@ -47,9 +50,10 @@ app.use(express.static("public"));
 
 app.use(UserRoute);
 app.use(AuthRoute);
+app.use(OvertimeRoute);
 
 // store.sync();
 
 app.listen(process.env.APP_PORT, () => {
     console.log('Server up and running...');
-});
+}); 
