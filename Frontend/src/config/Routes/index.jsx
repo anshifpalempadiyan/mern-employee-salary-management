@@ -6,6 +6,8 @@ import About from '../../pages/About';
 import Contact from '../../pages/Contact';
 import Login from '../../pages/Login';
 import Dashboard from '../../pages/Dashboard';
+import AddOvertime from "../../pages/Overtime/AddOvertime";
+import DataLembur from "../../pages/Overtime/DataLembur";
 import {
   FormAddDataJabatan,
   FormEditDataJabatan,
@@ -44,6 +46,8 @@ const AppRoutes = () => {
       <Route path='/kontak' element={<Contact />} />
       <Route path='/login' element={<Login />} />
       <Route path='/dashboard' element={<Dashboard />} />
+      <Route path="/add-overtime" element={<AddOvertime />} />
+      <Route path="/data-lembur" element={<DataLembur />} />
 
       {/* Route Admin */}
       {/* Master Data Admin */}

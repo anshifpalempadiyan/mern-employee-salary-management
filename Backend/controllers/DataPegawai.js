@@ -7,7 +7,7 @@ export const getDataPegawai = async (req, res) => {
     try {
         const response = await DataPegawai.findAll({
             attributes: [
-                'id', 'nik', 'nama_pegawai',
+                'id_pegawai' , 'id', 'nik', 'nama_pegawai',
                 'jenis_kelamin', 'jabatan', 'tanggal_masuk',
                 'status', 'photo', 'hak_akses'
             ]

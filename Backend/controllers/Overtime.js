@@ -30,6 +30,24 @@ export const createOvertime = async (req, res) => {
 
 
     try {
+
+        const workerExists = await DataPegawai.findOne({
+            where: { id_pegawai: userId }
+        });
+        if (!workerExists) {
+            return res.status(404).json({ msg: "Worker does not exist in the system" });
+        }
+
+        const duplicateEntry = await Overtime.findOne({
+            where: { 
+                userId: userId, 
+                date: date 
+            }
+        });
+        if (duplicateEntry) {
+            return res.status(400).json({ msg: "An overtime entry already exists for this worker on this date" });
+        }
+
         const startOfMonth = new Date(entryDate.getFullYear(), entryDate.getMonth(), 1)
         const endOfMonth = new Date(entryDate.getFullYear(), entryDate.getMonth() + 1, 0)
 
@@ -50,3 +68,12 @@ export const createOvertime = async (req, res) => {
         res.status(500).json({ msg: error.message });
     }
 };
+
+export const getOvertimes = async (req, res) => {
+    try {
+        const response = await Overtime.findAll();
+        res.status(200).json(response);
+    } catch (error) {
+        res.status(500).json({ msg: error.message });
+    }
+}

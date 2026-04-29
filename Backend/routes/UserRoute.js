@@ -70,6 +70,7 @@ const router = express.Router();
 
 /* ==== Master Data ==== */
 // Data Pegawai
+router.get('/users', verifyUser, adminOnly, getDataPegawai);
 router.get('/data_pegawai', verifyUser, adminOnly, getDataPegawai);
 router.get('/data_pegawai/id/:id', verifyUser, adminOnly, getDataPegawaiByID);
 router.get('/data_pegawai/nik/:nik', verifyUser, adminOnly, getDataPegawaiByNik);
