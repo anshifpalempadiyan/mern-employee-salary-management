@@ -56,6 +56,14 @@ export const createDataJabatan = async (req, res) => {
     const {
         id_jabatan, nama_jabatan, gaji_pokok, tj_transport, uang_makan
     } = req.body;
+
+    if (gaji_pokok <= 0 || tj_transport <= 0 || uang_makan <= 0) {
+        return res.status(400).json({ 
+            success: false, 
+            msg: "Salary, Transport, and Meal allowances must be greater than 0" 
+        });
+    }
+    
     try {
         if (req.hak_akses === "admin") {
             await DataJabatan.create({
