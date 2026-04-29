@@ -58,17 +58,17 @@ const PrintPdfLaporanGaji = () => {
     }
   }, [isError, user, navigate, handlePrint]);
 
-  useEffect(() => {
-    const today = new Date();
-    const monthNames = [
-      "Januari", "Februari", "Maret", "April", "Mei", "Juni",
-      "Juli", "Agustus", "September", "Oktober", "November", "Desember"
-    ];
-    const month = monthNames[today.getMonth()];
-    const year = today.getFullYear();
-    setBulan(month);
-    setTahun(year);
-  }, []);
+  // useEffect(() => {
+  //   const today = new Date();
+  //   const monthNames = [
+  //     "Januari", "Februari", "Maret", "April", "Mei", "Juni",
+  //     "Juli", "Agustus", "September", "Oktober", "November", "Desember"
+  //   ];
+  //   const month = monthNames[today.getMonth()];
+  //   const year = today.getFullYear();
+  //   setBulan(month);
+  //   setTahun(year);
+  // }, []);
 
   return (
     <>
@@ -190,7 +190,10 @@ const PrintPdfLaporanGaji = () => {
         </div>
         <div className="py-6">
           <div className="font-medium text-black text-right dark:text-white">
-            <span>Karawang, {`${new Date().getDate()} ${bulan} ${tahun}`}</span>
+            {/* <span>Karawang, {`${new Date().getDate()} ${bulan} ${tahun}`}</span> */}
+            <span className="text-right">
+              Karawang, {`${String(new Date().getDate()).padStart(2, '0')}/${String(new Date().getMonth() + 1).padStart(2, '0')}/${new Date().getFullYear()}`}
+            </span>
             <br />
             <span className="p-26">Finance</span>
             <br />
@@ -198,8 +201,11 @@ const PrintPdfLaporanGaji = () => {
             <span className="p-8 italic text-black dark:text-white">Tanda Tangan</span>
           </div>
         </div>
-        <div className="italic text-black dark:text-white mt-40">
+        {/* <div className="italic text-black dark:text-white mt-40">
           Dicetak Pada : {`${new Date().getDate()} ${bulan} ${tahun}`}
+        </div> */}
+        <div className="italic text-black dark:text-white mt-30">
+          Dicetak Pada : {`${String(new Date().getDate()).padStart(2, '0')}/${String(new Date().getMonth() + 1).padStart(2, '0')}/${new Date().getFullYear()}`}
         </div>
       </div>
     </>

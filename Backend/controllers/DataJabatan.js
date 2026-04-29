@@ -59,12 +59,14 @@ export const createDataJabatan = async (req, res) => {
     try {
         if (req.hak_akses === "admin") {
             await DataJabatan.create({
-                id_jabatan: id_jabatan,
+                // id_jabatan: id_jabatan,
+                id_jabatan: id_jabatan || `JAB-${Math.floor(Math.random() * 10000)}`,
                 nama_jabatan: nama_jabatan,
                 gaji_pokok: gaji_pokok,
                 tj_transport: tj_transport,
                 uang_makan: uang_makan,
-                userId: req.userId
+                // userId: req.userId
+                userId: req.userId || req.session?.userId || 'admin-001'
             });
         } else {
             if (req.userId !== DataJabatan.userId) return res.status(403).json({ msg: "Akses terlarang" });
@@ -81,8 +83,10 @@ export const createDataJabatan = async (req, res) => {
         console.log(error.message);
         res.status(500).json({ success: false, message: error.message });
     }
-
+    
 }
+
+
 
 // method untuk update data jabatan
 export const updateDataJabatan = async (req, res) => {

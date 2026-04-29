@@ -176,7 +176,8 @@ const PrintPdfLaporanAbsensi = () => {
                 </div>
                 <div className="py-6">
                     <div className="font-medium text-black text-right dark:text-white">
-                        <span>Karawang, {`${new Date().getDate()} ${bulan} ${tahun}`}</span>
+                        {/* <span>Karawang, {`${new Date().getDate()} ${bulan} ${tahun}`}</span> */}
+                        <span>Karawang, {`${String(new Date().getDate()).padStart(2, '0')}/${String(new Date().getMonth() + 1).padStart(2, '0')}/${new Date().getFullYear()}`}</span>
                         <br />
                         <span className="p-26">Finance</span>
                         <br />
@@ -185,7 +186,8 @@ const PrintPdfLaporanAbsensi = () => {
                     </div>
                 </div>
                 <div className="italic text-black dark:text-white mt-70">
-                    Dicetak Pada : {`${new Date().getDate()} ${bulan} ${tahun}`}
+                    {/* Dicetak Pada : {`${new Date().getDate()} ${bulan} ${tahun}`} */}
+                    Dicetak Pada : {`${String(new Date().getDate()).padStart(2, '0')}/${String(new Date().getMonth() + 1).padStart(2, '0')}/${new Date().getFullYear()}`}
                 </div>
             </div>
         </>
