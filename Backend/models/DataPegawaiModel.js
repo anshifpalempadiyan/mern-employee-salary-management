@@ -13,6 +13,10 @@ const DataPegawai = db.define('data_pegawai', {
             notEmpty: true
         }
     },
+    id: {
+        type: DataTypes.STRING, 
+        allowNull: true // Allow it to be null because we don't really use it
+    },
     nik: {
         type: DataTypes.STRING(16),
         allowNull: false
