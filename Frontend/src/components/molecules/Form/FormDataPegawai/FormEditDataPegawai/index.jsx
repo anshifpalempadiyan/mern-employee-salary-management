@@ -227,9 +227,10 @@ const FormEditDataPegawai = () => {
                                             </span>
                                         </div>
                                     </div>
-                                    
+
                                 </div>
 
+                                {/* ROW 4: Tanggal Masuk & Status */}
                                 <div className="mb-4.5 flex flex-col gap-6 xl:flex-row">
                                     <div className='w-full xl:w-1/2'>
                                         <label className='mb-2.5 block text-black dark:text-white'>
@@ -242,7 +243,7 @@ const FormEditDataPegawai = () => {
                                             value={tanggalMasuk}
                                             onChange={(e) => setTanggalMasuk(e.target.value)}
                                             required={true}
-                                            className='w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary'
+                                            className='w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary'
                                         />
                                     </div>
                                     <div className='w-full xl:w-1/2'>
@@ -266,30 +267,9 @@ const FormEditDataPegawai = () => {
                                             </span>
                                         </div>
                                     </div>
-                                    <div className='w-full xl:w-1/2'>
-                                        <label className='mb-2.5 block text-black dark:text-white'>
-                                            Hak Akses <span className='text-meta-1'>*</span>
-                                        </label>
-                                        <div className='relative z-20 bg-transparent dark:bg-form-input'>
-                                            <select className='relative z-20 w-full appearance-none rounded border border-stroke bg-transparent py-3 px-5 outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary'
-                                                id='hak_akses'
-                                                name='hak_akses'
-                                                value={hakAkses}
-                                                onChange={(e) => setHakAkses(e.target.value)}
-                                                required={true}
-                                            >
-                                                <option value='' disabled={true}>Pilih hak akses</option>
-                                                <option value='admin'>Admin</option>
-                                                <option value='pegawai'>Pegawai</option>
-                                            </select>
-                                            <span className='absolute top-1/2 right-4 z-30 -translate-y-1/2 text-2xl'>
-                                                <MdOutlineKeyboardArrowDown />
-                                            </span>
-                                        </div>
-                                    </div>
                                 </div>
-                                <div className="mb-4.5 flex flex-col gap-6 xl:flex-row">
-                                    
+                                {/* ROW 5: Hak Akses (Clean & Single) */}
+                                <div className="mb-6 flex flex-col gap-6 xl:flex-row">
                                     <div className='w-full xl:w-1/2'>
                                         <label className='mb-2.5 block text-black dark:text-white'>
                                             Hak Akses <span className='text-meta-1'>*</span>
@@ -311,6 +291,8 @@ const FormEditDataPegawai = () => {
                                             </span>
                                         </div>
                                     </div>
+                                    {/* Leaving the right side empty keeps the grid aligned */}
+                                    <div className='w-full xl:w-1/2'></div>
                                 </div>
 
                                 <div className='flex flex-col md:flex-row w-full gap-3 text-center'>

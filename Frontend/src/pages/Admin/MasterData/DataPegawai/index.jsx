@@ -2,13 +2,14 @@ import { useState, useEffect } from 'react';
 import Layout from '../../../../layout';
 import { Link, useNavigate } from 'react-router-dom';
 import { Breadcrumb, ButtonOne } from '../../../../components';
-import { FaRegEdit, FaPlus } from 'react-icons/fa';
+// import { FaRegEdit, FaPlus } from 'react-icons/fa';
 import { BsTrash3 } from 'react-icons/bs';
 import { useDispatch, useSelector } from 'react-redux';
 import Swal from 'sweetalert2';
 import { deleteDataPegawai, getDataPegawai, getMe } from '../../../../config/redux/action';
 import { BiSearch } from 'react-icons/bi';
 import { MdKeyboardDoubleArrowLeft, MdKeyboardDoubleArrowRight, MdOutlineKeyboardArrowDown } from 'react-icons/md';
+import { FaRegEdit, FaPlus, FaDownload } from 'react-icons/fa'; // Added FaDownload
 
 const ITEMS_PER_PAGE = 4;
 
@@ -143,18 +144,64 @@ const DataPegawai = () => {
 
         return items;
     };
+    const exportToCSV = () => {
+        // Define headers
+        const headers = ["Nama Pegawai", "Designation", "Jabatan (Department)", "NIK", "Status", "Tanggal Masuk"];
+
+        // Map data from your filtered list
+        const csvRows = filteredDataPegawai.map(pegawai => [
+            `"${pegawai.nama_pegawai}"`,
+            `"${pegawai.designation}"`,
+            `"${pegawai.jabatan}"`,
+            `"${pegawai.nik}"`,
+            `"${pegawai.status}"`,
+            `"${pegawai.tanggal_masuk}"`
+        ]);
+
+        // Create CSV content
+        const csvContent = [headers.join(","), ...csvRows.map(row => row.join(","))].join("\n");
+
+        // Create download link and trigger it
+        const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement("a");
+        link.setAttribute("href", url);
+        link.setAttribute("download", `Employee_List_${new Date().toISOString().split('T')[0]}.csv`);
+        link.style.visibility = 'hidden';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    };
 
     return (
         <Layout>
             <Breadcrumb pageName="Data Pegawai" />
-            <Link to="/data-pegawai/form-data-pegawai/add">
+            {/* <Link to="/data-pegawai/form-data-pegawai/add">
                 <ButtonOne>
                     <span>Tambah Pegawai</span>
                     <span>
                         <FaPlus />
                     </span>
                 </ButtonOne>
-            </Link>
+            </Link> */}
+            <div className='flex gap-3'>
+                <Link to="/data-pegawai/form-data-pegawai/add">
+                    <ButtonOne>
+                        <span>Tambah Pegawai</span>
+                        <span>
+                            <FaPlus />
+                        </span>
+                    </ButtonOne>
+                </Link>
+
+                <button
+                    onClick={exportToCSV}
+                    className="flex items-center gap-2 rounded bg-success py-2 px-4.5 font-medium text-white hover:bg-opacity-90 shadow-md"
+                >
+                    <span>Download CSV</span>
+                    <FaDownload />
+                </button>
+            </div>
             <div className="rounded-sm border border-stroke bg-white px-5 pt-6 pb-2.5 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:pb-1 mt-6">
                 <div className="flex justify-between items-center mt-4 flex-col md:flex-row md:justify-between">
                     <div className="relative flex-1 md:mr-2 mb-4 md:mb-0">
@@ -245,11 +292,13 @@ const DataPegawai = () => {
                                         <td className="border-b border-[#eee] py-5 px-4 dark:border-strokedark">
                                             <div className="flex items-center space-x-3.5">
                                                 <Link
+                                                    // Change data.id_pegawai to data.id
                                                     to={`/data-pegawai/form-data-pegawai/edit/${data.id}`}
                                                     className="hover:text-black">
                                                     <FaRegEdit className="text-primary text-xl hover:text-black dark:hover:text-white" />
                                                 </Link>
                                                 <button
+                                                    // Change data.id_pegawai to data.id
                                                     onClick={() => onDeletePegawai(data.id)}
                                                     className="hover:text-black">
                                                     <BsTrash3 className="text-danger text-xl hover:text-black dark:hover:text-white" />

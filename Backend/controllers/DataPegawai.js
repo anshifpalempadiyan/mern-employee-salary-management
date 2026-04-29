@@ -29,6 +29,7 @@ export const getDataPegawaiByID = async (req, res) => {
             ],
             where: {
                 id: req.params.id
+
             }
         });
         if (response) {
@@ -157,6 +158,7 @@ export const updateDataPegawai = async (req, res) => {
     const pegawai = await DataPegawai.findOne({
         where: {
             id: req.params.id
+
         }
     });
 
