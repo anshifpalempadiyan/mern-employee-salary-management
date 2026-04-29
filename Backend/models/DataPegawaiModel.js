@@ -40,6 +40,14 @@ const DataPegawai = db.define('data_pegawai', {
         type: DataTypes.STRING(50),
         allowNull: false
     },
+    // --- LF-103: Added Designation ---
+    designation: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+            notEmpty: true
+        }
+    },
     tanggal_masuk: {
         type: DataTypes.STRING,
         allowNull: false

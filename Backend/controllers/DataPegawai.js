@@ -7,7 +7,7 @@ export const getDataPegawai = async (req, res) => {
     try {
         const response = await DataPegawai.findAll({
             attributes: [
-                'id_pegawai' , 'id', 'nik', 'nama_pegawai',
+                'id_pegawai' , 'id', 'nik', 'nama_pegawai', 'designation', // Added this
                 'jenis_kelamin', 'jabatan', 'tanggal_masuk',
                 'status', 'photo', 'hak_akses'
             ]
@@ -23,7 +23,7 @@ export const getDataPegawaiByID = async (req, res) => {
     try {
         const response = await DataPegawai.findOne({
             attributes: [
-                'id', 'nik', 'nama_pegawai',
+                'id', 'nik', 'nama_pegawai', 'designation', // Added this
                 'jenis_kelamin', 'jabatan', 'username', 'tanggal_masuk',
                 'status', 'photo', 'hak_akses'
             ],
@@ -46,7 +46,7 @@ export const getDataPegawaiByNik = async (req, res) => {
     try {
         const response = await DataPegawai.findOne({
             attributes: [
-                'id', 'nik', 'nama_pegawai',
+                'id', 'nik', 'nama_pegawai', 'designation', // Added this
                 'jenis_kelamin', 'jabatan', 'tanggal_masuk',
                 'status', 'photo', 'hak_akses'
             ],
@@ -70,7 +70,7 @@ export const getDataPegawaiByName = async (req, res) => {
     try {
         const response = await DataPegawai.findOne({
             attributes: [
-                'id', 'nik', 'nama_pegawai',
+                'id', 'nik', 'nama_pegawai', 'designation', // Added this
                 'jenis_kelamin', 'jabatan', 'tanggal_masuk',
                 'status', 'photo', 'hak_akses'
             ],
@@ -91,7 +91,7 @@ export const getDataPegawaiByName = async (req, res) => {
 //  method untuk tambah data Pegawai
 export const createDataPegawai = async (req, res) => {
     const {
-        nik, nama_pegawai,
+        nik, nama_pegawai, designation, // Added this
         username, password, confPassword, jenis_kelamin,
         jabatan, tanggal_masuk,
         status, hak_akses
@@ -135,6 +135,7 @@ export const createDataPegawai = async (req, res) => {
                 password: hashPassword,
                 jenis_kelamin: jenis_kelamin,
                 jabatan: jabatan,
+                designation: designation, // 2. Added this
                 tanggal_masuk: tanggal_masuk,
                 status: status,
                 photo: fileName,
@@ -161,7 +162,7 @@ export const updateDataPegawai = async (req, res) => {
 
     if (!pegawai) return res.staus(404).json({ msg: "Data pegawai tidak ditemukan" });
     const {
-        nik, nama_pegawai,
+        nik, nama_pegawai, designation, // 1. Added this
         username, jenis_kelamin,
         jabatan, tanggal_masuk,
         status, hak_akses
@@ -174,6 +175,7 @@ export const updateDataPegawai = async (req, res) => {
             username: username,
             jenis_kelamin: jenis_kelamin,
             jabatan: jabatan,
+            designation: designation, // 2. Added this
             tanggal_masuk: tanggal_masuk,
             status: status,
             hak_akses: hak_akses

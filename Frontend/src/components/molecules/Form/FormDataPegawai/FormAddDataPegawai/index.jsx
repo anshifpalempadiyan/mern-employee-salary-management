@@ -17,6 +17,7 @@ const FormAddDataPegawai = () => {
         confPassword: '',
         jenisKelamin: '',
         jabatan: '',
+        designation: '', // 1. Add this
         tanggalMasuk: '',
         title: '',
         file: '',
@@ -33,6 +34,7 @@ const FormAddDataPegawai = () => {
         confPassword,
         jenisKelamin,
         jabatan,
+        designation, // 2. Add this
         tanggalMasuk,
         title,
         file,
@@ -78,6 +80,7 @@ const FormAddDataPegawai = () => {
         newFormData.append('confPassword', confPassword);
         newFormData.append('jenis_kelamin', jenisKelamin);
         newFormData.append('jabatan', jabatan);
+        newFormData.append('designation', designation); // Add this line
         newFormData.append('tanggal_masuk', tanggalMasuk);
         newFormData.append('status', status);
         newFormData.append('hak_akses', hak_akses);
@@ -274,6 +277,34 @@ const FormAddDataPegawai = () => {
                                     </div>
                                     <div className='w-full xl:w-1/2'>
                                         <label className='mb-2.5 block text-black dark:text-white'>
+                                            Designation <span className='text-meta-1'>*</span>
+                                        </label>
+                                        <div className='relative z-20 bg-transparent dark:bg-form-input'>
+                                            <select className='relative z-20 w-full appearance-none rounded border border-stroke bg-transparent py-3 px-5 outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary'
+                                                id='designation'
+                                                name='designation'
+                                                value={designation}
+                                                onChange={handleChange}
+                                                required={true}
+                                            >
+                                                <option value='' disabled={true}>Select Designation</option>
+                                                <option value='Mason'>Mason</option>
+                                                <option value='Electrician'>Electrician</option>
+                                                <option value='Plumber'>Plumber</option>
+                                                <option value='Supervisor'>Supervisor</option>
+                                                <option value='Helper'>Helper</option>
+                                            </select>
+                                            <span className='absolute top-1/2 right-4 z-30 -translate-y-1/2 text-2xl'>
+                                                <MdOutlineKeyboardArrowDown />
+                                            </span>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+
+                                <div className="mb-4.5 flex flex-col gap-6 xl:flex-row">
+                                    <div className='w-full xl:w-1/2'>
+                                        <label className='mb-2.5 block text-black dark:text-white'>
                                             Tanggal Masuk <span className='text-meta-1'>*</span>
                                         </label>
                                         <input
@@ -286,9 +317,6 @@ const FormAddDataPegawai = () => {
                                             className='w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary'
                                         />
                                     </div>
-                                </div>
-
-                                <div className="mb-4.5 flex flex-col gap-6 xl:flex-row">
                                     <div className='w-full xl:w-1/2'>
                                         <label className='mb-2.5 block text-black dark:text-white'>
                                             Status <span className='text-meta-1'>*</span>
@@ -310,6 +338,11 @@ const FormAddDataPegawai = () => {
                                             </span>
                                         </div>
                                     </div>
+                                    
+
+                                </div>
+                                {/* ROW 6: Hak Akses & Upload Foto */}
+                                <div className="mb-4.5 flex flex-col gap-6 xl:flex-row">
                                     <div className='w-full xl:w-1/2'>
                                         <label className='mb-2.5 block text-black dark:text-white'>
                                             Hak Akses <span className='text-meta-1'>*</span>
@@ -331,12 +364,9 @@ const FormAddDataPegawai = () => {
                                             </span>
                                         </div>
                                     </div>
-
-                                </div>
-                                <div className="mb-4.5 flex flex-col gap-6 xl:flex-row">
                                     <div className="w-full xl:w-1/2">
                                         <label className="mb-2.5 block text-black dark:text-white ">
-                                            Upload Foto (<span className='text-meta-1'> Format file png, jpg, jpeg, Max 2 MB </span>)
+                                            Upload Foto (<span className='text-meta-1 block text-xs font-normal'> Format: png, jpg, jpeg | Max 2 MB </span>)
                                             <span className="text-meta-1"> *</span>
                                         </label>
                                         <input
@@ -346,26 +376,26 @@ const FormAddDataPegawai = () => {
                                             required={true}
                                         />
                                     </div>
-                                    <div className="flex justify-center items-center">
-                                        {preview ? (
-                                            <figure className="relative w-64 h-64 sm:w-40 sm:h-40 md:w-56 md:h-56 lg:w-64 lg:h-64 animate-fadeIn">
-                                                <img
-                                                    src={preview}
-                                                    alt="People Image"
-                                                    className="object-cover w-full h-full shadow-6 rounded-xl"
-                                                />
-                                                <button
-                                                    onClick={imageCancel}
-                                                    className="absolute top-2 right-2 bg-white dark:bg-black/30 rounded-full p-1.5 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none"
-                                                >
-                                                    <AiOutlineClose className="h-5 w-5" />
-                                                </button>
-                                            </figure>
-                                        ) : (
-                                            ""
-                                        )}
-                                    </div>
                                 </div>
+                                {/* ROW 7: Centered Preview (Fixed duplicated logic) */}
+                                {preview && (
+                                    <div className="mb-6 flex justify-center">
+                                        <figure className="relative w-48 h-48 animate-fadeIn">
+                                            <img
+                                                src={preview}
+                                                alt="Preview"
+                                                className="object-cover w-full h-full shadow-6 rounded-xl border border-stroke dark:border-strokedark"
+                                            />
+                                            <button
+                                                type="button"
+                                                onClick={imageCancel}
+                                                className="absolute -top-2 -right-2 bg-white dark:bg-black/30 rounded-full p-1.5 text-danger shadow-md hover:scale-110 transition focus:outline-none"
+                                            >
+                                                <AiOutlineClose className="h-6 w-6" />
+                                            </button>
+                                        </figure>
+                                    </div>
+                                )}
 
                                 <div className='flex flex-col md:flex-row w-full gap-3 text-center'>
                                     <div>

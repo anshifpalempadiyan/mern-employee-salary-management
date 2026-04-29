@@ -195,6 +195,8 @@ const DataPegawai = () => {
                                 <th className="py-4 px-4 font-medium text-black dark:text-white xl:pl-11">Photo</th>
                                 <th className="py-4 px-4 font-medium text-black dark:text-white xl:pl-11">NIK</th>
                                 <th className="py-4 px-4 font-medium text-black dark:text-white">Nama Pegawai</th>
+                                <th className="py-4 px-4 font-medium text-black dark:text-white">Jabatan</th>
+                                <th className="py-4 px-4 font-medium text-black dark:text-white">Designation</th> {/* Add this */}
                                 <th className="py-4 px-4 font-medium text-black dark:text-white">Jenis Kelamin</th>
                                 <th className="py-4 px-4 font-medium text-black dark:text-white">Tanggal Masuk</th>
                                 <th className="py-4 px-4 font-medium text-black dark:text-white">Status</th>
@@ -221,6 +223,12 @@ const DataPegawai = () => {
                                         </td>
                                         <td className="border-b border-[#eee] py-5 px-4 dark:border-strokedark">
                                             <p className="text-black dark:text-white">{data.nama_pegawai}</p>
+                                        </td>
+                                        <td className="border-b border-[#eee] py-5 px-4 dark:border-strokedark">
+                                            <p className="text-black dark:text-white">{data.jabatan}</p>
+                                        </td>
+                                        <td className="border-b border-[#eee] py-5 px-4 dark:border-strokedark">
+                                            <p className="text-black dark:text-white">{data.designation}</p> {/* Add this */}
                                         </td>
                                         <td className="border-b border-[#eee] py-5 px-4 dark:border-strokedark">
                                             <p className="text-black dark:text-white">{data.jenis_kelamin}</p>
